@@ -1,0 +1,17 @@
+<ul>
+{% for item in items %}
+    <li>
+        <a href="?selected_menu={{ menu_name }}&selected_row={{ item.model.id }}">{{ item.model.title }}</a>
+    </li>
+    {% if item.children %}
+        <ul>
+            {% for child in item.children %}
+                <li>
+                    <a href="?selected_menu={{ menu_name }}&selected_row={{ child.model.id }}">{{ child.model.title }}</a>
+                    {% include 'menu.html' with items=child.children %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endfor %}
+</ul>
